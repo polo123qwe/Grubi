@@ -1,0 +1,19 @@
+{
+  "name": "moosic",
+  "version": "0.1.0",
+  "description": "Music Bot for local songs",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "refreshcommands": "node refreshcommands.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.8.0",
+    "@discordjs/voice": "^0.13.0",
+    "discord.js": "^14.6.0",
+    "ffmpeg-static": "^5.1.0",
+    "sodium-native": "^3.4.1"
+  }
+}
