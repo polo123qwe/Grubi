@@ -20,7 +20,6 @@ class SongQueueManager {
     if (this.songQueues[guildId] == null) {
       this.songQueues[guildId] = {
         queue: [],
-        shuffle: false,
         subscription: null,
       };
     }
@@ -102,13 +101,37 @@ class SongQueueManager {
   }
 
   async playNextSong(guildId) {
+
     const guildQueue = this.getGuildQueue(guildId);
     const nextSong = guildQueue.queue.shift();
+    if (nextSong == null) return;
     console.log("Now playing", nextSong)
     const resource = createAudioResource(nextSong);
     guildQueue.subscription.player.play(resource);
-    await wait(5000);
-    guildQueue.subscription.player.stop();
+    //  await wait(5000);
+    //guildQueue.subscription.player.stop();
+
+
+  }
+
+  shuffle(guildId) {
+    const guildQueue = this.getGuildQueue(guildId);
+    let currentIndex = guildQueue.queue.length, randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [guildQueue.queue[currentIndex], guildQueue.queue[randomIndex]] = [
+        guildQueue.queue[randomIndex], guildQueue.queue[currentIndex]];
+    }
+
+
+
   }
 }
 
